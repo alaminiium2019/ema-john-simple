@@ -13,7 +13,7 @@ const Shop = () => {
 
 
   useEffect(()=>{
-    fetch('http://localhost:5000/products')
+    fetch('https://ema-john--server.herokuapp.com/products')
     .then(res => res.json())
     .then(data => setProducts(data))
 
@@ -24,7 +24,7 @@ const Shop = () => {
     const savedCart = getDatabaseCart();
     const productKeys = Object.keys(savedCart);
 
-    fetch('http://localhost:5000/productsByKeys' ,{
+    fetch('https://ema-john--server.herokuapp.com/productsByKeys' ,{
       method: 'POST',
       headers: {
         'Content-Type':'application/json'
