@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import fakeData from "../../fakeData";
 import { useState } from "react";
 import "./Shop.css";
 import Product from "../Product/Product";
@@ -24,15 +23,26 @@ const Shop = () => {
   useEffect(() => {
     const savedCart = getDatabaseCart();
     const productKeys = Object.keys(savedCart);
-   if(products.length){
-    const previousCart = productKeys.map(existingKey => {
-      const product = products.find(pd => pd.key === existingKey);
-      product.quantity = savedCart[existingKey];
-      return product;
+
+    fetch('http://localhost:5000/productsByKeys' ,{
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify(productKeys)
     })
-    setCart(previousCart)
-   }
-  },[products]);
+    .then(res => res.json())
+    .then(data => setCart(data))
+
+  //  if(products.length){
+  //   const previousCart = productKeys.map(existingKey => {
+  //     const product = products.find(pd => pd.key === existingKey);
+  //     product.quantity = savedCart[existingKey];
+  //     return product;
+  //   })
+  //   setCart(previousCart)
+  //  }
+  },[]);
 
 
 

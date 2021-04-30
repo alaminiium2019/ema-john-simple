@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import fakeData from '../../fakeData';
 import Product from '../Product/Product';
 
 
